@@ -1,0 +1,45 @@
+name: sgf_mobile
+description: "FISCALIS - Aplicacion movil de fiscalizacion municipal"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^2.5.1
+  dio: ^5.5.0
+  drift: ^2.31.0
+  sqlcipher_flutter_libs: ^0.7.0+eol
+  crypto: ^3.0.3
+  path_provider: ^2.1.5
+  path: ^1.9.1
+  flutter_secure_storage: ^9.2.2
+  connectivity_plus: ^7.1.1
+  geolocator: ^13.0.1
+  image_picker: ^1.1.2
+  uuid: ^4.5.3
+  intl: ^0.20.2
+  equatable: ^2.0.8
+  drift_flutter: ^0.2.8
+  shared_preferences: ^2.5.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  drift_dev: ^2.16.0
+  build_runner: ^2.4.9
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter:
+  uses-material-design: true
+  assets:
+  - assets/images/
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/images/fiscalis_logo.png"

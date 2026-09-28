@@ -1,0 +1,78 @@
+# =============================================================================
+# FLUTTER / DART / PUB
+# =============================================================================
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+/build/
+/coverage/
+.flutter-plugins
+.flutter-plugins-dependencies
+.fvm/
+.fvm_config.json
+
+# =============================================================================
+# SEGURIDAD Y CREDENCIALES (ISO 27001 / Ley 19.628)
+# =============================================================================
+.env
+.env.*
+*.pem
+*.key
+*.p8
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.cer
+*.crt
+*.cert
+*.der
+*.csr
+credentials.json
+service-account*.json
+google-services.json
+GoogleService-Info.plist
+firebase_options.dart
+android/local.properties
+android/key.properties
+android/*.keystore
+
+# =============================================================================
+# IDEs Y CONFIGURACIÓN DE SISTEMA
+# =============================================================================
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+.#*
+
+# =============================================================================
+# DATOS SENSIBLES Y CACHÉS LOCALES
+# =============================================================================
+*.db
+*.sqlite
+*.sqlite3
+*.realm
+*.db-journal
+*.db-wal
+*.db-shm
+logs/
+*.log
+/test/fixtures/mock_database.sqlite
+
+# =============================================================================
+# VIRTUAL ENV Y JDKS (El error que causó tu crash de git)
+# =============================================================================
+venv/
+.env/
+oracleJdk-26/
+.gradle/
