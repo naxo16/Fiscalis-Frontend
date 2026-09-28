@@ -1,8 +1,5 @@
-import 'dart:io';
 import 'package:drift/drift.dart';
-import 'package:drift/native.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as p;
+import 'package:drift_flutter/drift_flutter.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 part 'database.g.dart';
@@ -52,17 +49,28 @@ class AppDatabase extends _$AppDatabase {
 
   static QueryExecutor _openConnection() {
     return LazyDatabase(() async {
-      final dbFolder = await getApplicationDocumentsDirectory();
-      final file = File(p.join(dbFolder.path, 'fiscalis_secure.db'));
-      
       // Obtener el JWT para usarlo como llave criptográfica
       const storage = FlutterSecureStorage();
       final jwtToken = await storage.read(key: 'jwt');
       final dbKey = jwtToken ?? 'temp_ram_key'; // Fallback temporal en caso de no haber sesión
 
-      return NativeDatabase.createInBackground(file, setup: (db) {
-        db.execute("PRAGMA key = '$dbKey';");
-      });
+      return driftDatabase(
+        name: 'fiscalis_secure',
+        native: DriftNativeOptions(
+          setup: (db) {
+            db.execute("PRAGMA key = '\$dbKey';");
+          },
+        ),
+        web: DriftWebOptions(
+          sqlite3Wasm: Uri.parse('sqlite3.wasm'),
+          driftWorker: Uri.parse('drift_worker.js'),
+          onResult: (result) {
+            if (result.missingFeatures.isNotEmpty) {
+              print('Using \${result.chosenImplementation} due to missing browser features: \${result.missingFeatures}');
+            }
+          },
+        ),
+      );
     });
   }
 }
