@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsNotifier extends StateNotifier<String> {
-  SettingsNotifier() : super('http://10.0.2.2:8000') {
+  SettingsNotifier() : super('https://sistema-gesti-n-fiscalizadora.onrender.com') {
     _loadUrl();
   }
 
