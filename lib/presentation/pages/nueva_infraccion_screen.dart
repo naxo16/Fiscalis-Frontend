@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../providers/formulario_provider.dart';
+import '../providers/infraccion_provider.dart';
 import '../providers/settings_provider.dart';
 import '../widgets/main_scaffold.dart';
 import '../utils/formatters.dart';
@@ -159,9 +160,7 @@ class _NuevaInfraccionScreenState extends ConsumerState<NuevaInfraccionScreen> {
         await _clearDraft();
 
         if (!context.mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Infracción Guardada (Modo Offline)')),
-        );
+        try { await ref.read(syncServiceProvider).syncPendingInfracciones(); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Guardado y enviado a Render'))); } catch (_) { ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Guardado localmente (Offline)'))); }
         // Navegar al historial
         // Navigator.pushReplacementNamed(context, '/historial');
       } catch (e) {
@@ -337,7 +336,7 @@ class _NuevaInfraccionScreenState extends ConsumerState<NuevaInfraccionScreen> {
               width: double.infinity,
               height: 48,
               child: ElevatedButton.icon(
-                onPressed: (formState.latitud == null || formState.fotosConHash.isEmpty) ? null : _guardar,
+                onPressed: _guardar,
                 icon: Icon(Icons.save, color: _cOnPrimary),
                 label: const FittedBox(
                   fit: BoxFit.scaleDown,
@@ -658,3 +657,4 @@ class _NuevaInfraccionScreenState extends ConsumerState<NuevaInfraccionScreen> {
     );
   }
 }
+

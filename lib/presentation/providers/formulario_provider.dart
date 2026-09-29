@@ -182,18 +182,14 @@ class FormularioInfraccionNotifier extends StateNotifier<FormularioState> {
     int? tipoInfraccionId,   // <-- NUEVO (1 = Advertencia, 2 = Citación)
     bool firmaRechazo = false,
   }) async {
-    if (state.latitud == null || state.fotosConHash.isEmpty) {
-      throw Exception('Faltan datos obligatorios (GPS/Fotos)');
-    }
-
     final actaUuid = const Uuid().v4();
     
     await _db.transaction(() async {
       await _db.into(_db.actasInfraccion).insert(
         ActasInfraccionCompanion.insert(
           uuid: actaUuid,
-          latitud: state.latitud!,
-          longitud: state.longitud!,
+          latitud: state.latitud ?? 0.0,
+          longitud: state.longitud ?? 0.0,
           ppu: ppu,
           nombreInfractor: Value(nombreInfractor), 
           rutInfractor: Value(rutInfractor),       
