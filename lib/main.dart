@@ -8,8 +8,6 @@ import 'presentation/pages/ajustes_screen.dart';
 import 'presentation/pages/mfa_verification_screen.dart';
 import 'presentation/pages/session_lock_screen.dart';
 import 'presentation/pages/mfa_setup_screen.dart';
-import 'presentation/pages/web_landing_screen.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 final GlobalKey<NavigatorState> globalNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -28,7 +26,7 @@ class MyApp extends StatelessWidget {
       title: 'Fiscalis',
       initialRoute: '/',
       routes: {
-        '/': (context) => kIsWeb ? const WebLandingScreen() : const SplashScreen(),
+        '/': (context) => const SplashScreen(),
         '/login': (context) => const LoginScreen(),
         '/mfa_verify': (context) => const MfaVerificationScreen(),
         '/mfa_setup': (context) => const MfaSetupScreen(),
